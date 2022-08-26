@@ -1,0 +1,188 @@
+import org.openqa.selenium.By;
+
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+public class TextField {
+
+	public static void main(String[] args) {
+		//Launch WebDriver
+		System.setProperty("webdriver.chrome.driver", "C://Users//4147//Desktop//QA Tools//chromedriver_win32/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://omayo.blogspot.in/");
+		//Enter Text in TextField-1 and get text from Field-2 , clear text and enter text in field-2
+		driver.findElement(By.id("ta1")).sendKeys("Safdar Hussain");
+		WebElement text1 = driver.findElement(By.xpath("//textarea[contains(text(), 'The cat was playing in the garden.')]"));
+		text1.getText();
+		//System.out.println("Text Field 2 : "+ text1);
+		text1.clear();
+		text1.sendKeys("I am bootcamp student in QA department");
+		//Fetch the data from the WebElement Web Table
+		List<WebElement> names = driver.findElements(By.xpath("//table[@id = 'table1']/tbody/tr/td[1]"));
+		List<WebElement> ages = driver.findElements(By.xpath("//table[@id = 'table1']/tbody/tr/td[2]"));
+		List<WebElement> places = driver.findElements(By.xpath("//table[@id = 'table1']/tbody/tr/td[3]"));
+		for(int i = 0; i<names.size(); i++) {
+			System.out.println("Name :" + names.get(i).getText());
+			System.out.println("Age :" + ages.get(i).getText());
+			System.out.println("Place :" + places.get(i).getText());
+		}
+		//Enter user name and password and click on login button
+		driver.findElement(By.xpath("//form[@name = 'form1']//input[1]")).sendKeys("safdar");
+		driver.findElement(By.xpath("//form[@name = 'form1']//input[2]")).sendKeys("4147");
+		/*try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}*/
+		driver.findElement(By.xpath("//button[@value = 'LogIn']")).click();
+		//Switch the frames
+        WebElement frame1 = driver.findElement(By.xpath("//iframe[@id = 'iframe1']"));
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(frame1);
+		String currentWindowHandle = driver.getWindowHandle();
+		driver.switchTo().window(currentWindowHandle);
+        driver.switchTo().defaultContent();
+		WebElement frame2 = driver.findElement(By.xpath("//iframe[@id = 'iframe2']"));
+		driver.switchTo().frame(frame2);
+		driver.switchTo().window(currentWindowHandle);
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		//Again enter user name and password and handle the alert
+		driver.findElement(By.xpath("//input[@name = 'userid']")).sendKeys("safdarhussain");
+		driver.findElement(By.xpath("//input[@name = 'pswrd']")).sendKeys("246");
+		driver.findElement(By.xpath("//input[@value = 'Login']")).click();
+		driver.switchTo().alert().accept();
+		//Select the option in Multi Selection box
+		driver.findElement(By.xpath("//select[@id = 'multiselect1']/option[3]")).click();
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		//Select the option and clear the text , enter a text
+		driver.findElement(By.xpath("//select[@id = 'drop1']/option[4]")).click();
+		driver.findElement(By.xpath("//input[@id = 'textbox1']")).clear();
+		driver.findElement(By.xpath("//input[@id = 'textbox1']")).sendKeys("Hello");
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		//Click on different buttons and handle the alert
+		driver.findElement(By.xpath("//button[@id = 'but2']")).click();
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		driver.findElement(By.xpath("//button[text() = 'Submit']")).click();
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		driver.findElement(By.xpath("//button[text() = 'Login']")).click();
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		driver.findElement(By.xpath("//button[text() = 'Register']")).click();
+		driver.findElement(By.xpath("//input[@id = 'alert2']")).click();
+		driver.switchTo().alert().accept();
+		//Click on button and get the text
+		driver.findElement(By.xpath("//a[text() = 'Open a popup window']")).click();
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {}
+		String MainWindow = driver.getWindowHandle();
+		Set<String> s1 = driver.getWindowHandles();
+	    System.out.println("Child window handle is" + s1);
+	    Iterator<String> i1 = s1.iterator();
+
+	    // Here we will check if child window has other child windows and when child window
+	    //is the main window it will come out of loop.
+	      while (i1.hasNext()) {
+	          String ChildWindow = i1.next();
+	          if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+	              driver.switchTo().window(ChildWindow);
+	            WebElement text2 = driver.findElement(By.xpath("//p[contains(text(), 'A paragraph of text')]"));
+	      		text2.getText();
+	      		WebElement text3 = driver.findElement(By.xpath("//p[contains(text(), 'Another paragraph of text')]"));
+	      		text3.getText();
+	      		System.out.println("Test field 2 : " + text2.getText());
+	      		System.out.println("Test field 3 : " + text3.getText());  
+	      		driver.close();
+	      		driver.switchTo().window(currentWindowHandle);
+	           }
+	       }
+		
+		//Upload a file
+		WebElement addfile = driver.findElement(By.xpath("//input[@id = 'uploadfile']"));
+		addfile.sendKeys("\\\\share\\QABootCamp\\QA Automation\\Labs\\Lab5.docx");
+		//Click on button and disable the above button after 10's
+		driver.findElement(By.xpath("//button[text() = 'Try it']")).click();
+		try {
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e) {}
+		//Perform Mouse Double click action
+		WebElement cb = driver.findElement(By.xpath("//button[contains(text() ,'Double click Here')]"));
+		Actions act = new Actions (driver);
+		act.doubleClick(cb).perform();
+		driver.switchTo().alert().accept();
+		
+		driver.findElement(By.xpath("//button[contains(text() ,'Check this')]")).click();
+		Wait<WebDriver> wait = new WebDriverWait(driver , Duration.ofSeconds(15));
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id = 'dte']")));
+		Actions actions = new Actions(driver);
+		//Select the radio button
+		actions.moveToElement(element).click().build().perform();
+		WebElement radio1 = driver.findElement(By.xpath("//input[@id = 'radio1']"));
+		radio1.click();
+		driver.findElement(By.xpath("//input[@id = 'alert1']")).click();
+		driver.switchTo().alert().accept();
+		
+		
+		WebElement orange= driver.findElement(By.xpath("//input[@value= 'orange']"));
+		WebElement blue= driver.findElement(By.xpath("//input[@value= 'blue']"));
+		if(orange.isSelected()) {
+			orange.click();
+			blue.click();
+		}
+		//read the text and enter your text
+		WebElement text4 = driver.findElement(By.xpath("//input[@id = 'rotb']"));
+		System.out.println("Text field 4 :" + text4.getAttribute("value"));
+		driver.findElement(By.xpath("//input[@id = 'prompt']")).click();
+		driver.switchTo().alert().sendKeys("Hussain");
+		driver.switchTo().alert().accept();
+		driver.findElement(By.xpath("//input[@id = 'confirm']")).click();
+		driver.switchTo().alert().accept();
+		
+		driver.findElement(By.xpath("//input[@name = 'textboxn']")).sendKeys("Hello World");
+		driver.findElement(By.xpath("//div[@id = 'HTML24']//input")).sendKeys("Hey Everyone !!!");
+		driver.findElement(By.xpath("//div[@id = 'HTML28']//input")).sendKeys("Hey !!!");
+		WebElement radioC = driver.findElement(By.xpath("//input[@value = 'Car']"));
+		radioC.click();
+		
+		driver.findElement(By.xpath("//input[@value = 'Bag']")).click();
+		
+		WebElement book = driver.findElement(By.xpath("//input[@value = 'Book']"));
+		if(book.isSelected()) {
+			book.click();
+		}
+		driver.findElement(By.xpath("//button[@class = 'dropbtn']")).click();
+		driver.findElement(By.xpath("//a[contains(text(), 'Gmail')]")).click();
+	}
+
+}

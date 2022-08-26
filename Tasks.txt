@@ -1,0 +1,248 @@
+2)Even or Odd
+--------------
+
+#include <iostream>
+using namespace std;
+
+    void EvenorOdd(int);
+    void EvenorOdd(int number){
+     if(number%2==0){
+       cout<<"Number is Even"<<endl;
+     }
+      else{
+        cout<<"Number is Odd"<<endl;
+      }
+    }
+  int main(){
+    cout<<"Enter a number"<<endl;
+    EvenorOdd(5);
+    return 0;
+  }
+
+6) Print Table
+----------------
+
+#include <iostream>
+using namespace std;
+
+    void PrintTable(int num = 5, int start= 1, int end =10){
+     for(int mul= start; mul <=end; mul +=1){
+       cout<<num<<"x"<<mul<<"="<<num*mul<<endl;
+     }
+    }
+  int main(){
+    PrintTable();
+    return 0;
+  }
+9)Print triangle using starick
+---------------------------------
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int size = 0;
+    cout<<"Enter the size of triangle"<<endl;
+  cin>>size;
+  for(int line = 1; line < size+1; line++){
+    for(int star = 1; star < line+1; star++){
+      cout<<"*";
+    }
+    cout<<endl;
+  }
+}
+
+4) Element present or not
+#include <iostream>
+using namespace std;
+   
+void Search(int count){
+    int arr[5] ,  i, num;
+        
+    cout << "Enter " << count << " numbers "<<endl;
+      
+    for(i = 0; i < count; i++){
+        cin >> arr[i];
+    }
+      
+    cout << "Enter a number to serach in Array"<<endl;
+    cin >> num;
+      
+    for(i = 0; i < count; i++){
+        if(arr[i] == num){
+            cout << "Element found at index " << i;
+        }
+      
+      else
+          cout<<"Element not found in Array"<<endl;
+    
+      }
+  }
+    int main(){
+      Search(2);
+    return 0;
+}
+3)Sum Number
+--------------
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a ,b , sum = 0;
+  cout<<"Enter the First Number "<<endl;
+    cin>>a;
+   cout<<"Enter the Second Number "<<endl;
+  cin>>b;
+  sum = a + b;
+  cout<<"The sum of two number is : "<<sum<<endl;
+    return 0;
+}
+5)Find Largest number
+---------------------
+#include <iostream>
+using namespace std;
+void largeValue(int size){
+  
+    
+    int arr[size]; 
+    
+    cout << "Enter the elements of  the array:"<<endl;
+    for (int i = 0; i < size; i++)
+    {   
+      cin >> arr[i];
+    }
+
+    for (int i = 1; i < size; i++) { 
+        if (arr[0] < arr[i]){
+            arr[0] = arr[i];  
+    }
+      }
+    cout << "Largest number of the array: "<< arr[0]<<endl;
+      
+  }
+  int main(){
+    largeValue(5);
+    return 0;
+}
+7) Odd value find
+#include <iostream>
+using namespace std;
+void OddValue(int size){
+  
+    
+    int arr[size]; 
+    
+    cout << "Enter the elements of  the array:"<<endl;
+    for (int i = 0; i < size; i++)
+    {   
+      cin >> arr[i];
+    }
+
+    for (int i = 1; i < size; i+=2) { 
+          
+      cout<<"The odd values is : "<<endl;
+        cout<<arr[i]<<endl;
+    
+    }
+      
+  }
+  int main(){
+    OddValue(5);
+    return 0;
+}
+10) Number Pyramid
+--------------------
+#include <iostream>
+using namespace std;
+
+int main() {
+    int size = 0;
+    cout<<"Enter the size of triangle"<<endl;
+  cin>>size;
+  for(int line = 1; line < size+1; line++){
+    for(int star = 1; star < line+1; star++){
+      cout<<star;
+    }
+    cout<<endl;
+  }
+}
+11)Palindrome
+------------------
+#include <bits/stdc++.h>
+using namespace std;
+ 
+string isPalindrome(string S)
+{
+    
+    string P = S;
+ 
+    reverse(P.begin(), P.end());
+ 
+    if (S == P) {
+  
+        return "Yes";
+    }
+  
+    else {
+        
+        return "No";
+    }
+}
+ 
+int main()
+{
+    string S = "ABCDCBA";
+    cout << isPalindrome(S);
+ 
+    return 0;
+}
+1) Hello world
+---------------
+#include <iostream>
+using namespace std;
+
+int main() {
+    string name;
+   cout<<"Enter the name : "<<endl;
+  cin>>name;
+  cout<<"Hello"<<" "<<name<<endl;
+    return 0;
+}
+8) Prime or not
+---------------------
+#include <iostream>
+using namespace std;
+
+bool check_prime(int);
+
+int main() {
+
+  int n;
+
+  cout << "Enter a positive  integer: ";
+  cin >> n;
+
+  if (check_prime(n))
+    cout << n << " is a prime number.";
+  else
+    cout << n << " is not a prime number.";
+
+  return 0;
+}
+
+bool check_prime(int n) {
+  bool is_prime = true;
+
+  if (n == 0 || n == 1) {
+    is_prime = false;
+  }
+
+  for (int i = 2; i <= n / 2; ++i) {
+    if (n % i == 0) {
+      is_prime = false;
+      break;
+    }
+  }
+
+  return is_prime;
+}
